@@ -19,9 +19,11 @@ var app = express();
 
 
 // *** view engine *** //
-var swig = new swig.Swig();
-app.engine('html', swig.renderFile);
-app.set('view engine', 'html');
+// var swig = new swig.Swig();
+// app.engine('html', swig.renderFile);
+// app.set('view engine', 'html');
+app.set('view engine', 'ejs');
+
 
 
 // *** static directory *** //
@@ -81,5 +83,7 @@ app.use(function(err, req, res, next) {
 // mongoose - MongoDb connection 
 mongoose.connect('mongodb://localhost/passport-social-auth');
 
+// setting up the public images
+app.use(express.static('public'))
 
 module.exports = app;
