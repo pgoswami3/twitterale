@@ -5,31 +5,27 @@
     <title><%= title %></title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/main.css">
+    
   </head>
   <body>
-    <a href="https://twitter.com/Goswamipratik2" class="twitter-follow-button" data-show-count="false">Follow me: @Goswamipratik2</a>
 
-    <div class="container">
-    <div style="width:100%;">
-
-      <!-- Timeline/Tweets -->
-      <div class= "timeline">
-        <a class="twitter-timeline" href="https://twitter.com/<%= tweets[0].user.screen_name%>"> Tweets by <%= tweets[0].user.name%></a> 
-        <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-      </div>
-
-      <!-- Mining-->
-      <div class="mining">
-        <img src="/images/B31Uwkm.png">
-      </div>
-
+    <div class="col-sm-8 wordcloud">
+      <a href="https://twitter.com/Goswamipratik2" class="twitter-follow-button" data-show-count="false">Follow me: @Goswamipratik2</a>
+      <% include wordcloud.ejs %>
     </div>
-  </div>
-    
+
+    <div class="col-sm-4 timeline">
+      <a class="twitter-timeline" href="https://twitter.com/<%= tweets[0].user.screen_name%>"> Tweets by <%= tweets[0].user.name%></a>
+      <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+
+    <script type="text/javascript" src="/js/d3.js"></script>
+    <script type="text/javascript" src="/js/d3.layout.cloud.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/main.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/split.js/1.2.0/split.min.js">
     </script>
+
   </body>
 </html>

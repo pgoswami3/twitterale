@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Twitter = require('twitter');
 var config = require('../_config');
+var textOnly = [];
 
 // Authentication for twitter
 var passportTwitter = require('../auth/twitter');
@@ -32,12 +33,21 @@ router.get('/tweet', function(req, res){
 	if (passportTwitter.authenticate('twitter'))
 		client.get('statuses/user_timeline', function(error, tweets, response) {
     	if (!error) {
+          for (var i=0; i<tweets.length; i++){
+            textOnly.push(tweets[i].text);
+          }
+          //express.locals.textOnly = textOnly; // not a good idea!
+          
       		res.status(200).render('tweet', { title: 'Twitterale', tweets: tweets });
     	}
     	else {
       		res.status(500).json({ title: 'Error!', error: error });
     	}
   	});
+});
+
+router.get('/wordcloud', function(req, res){
+  res.render('wordcloud');
 });
 
 module.exports = router;
