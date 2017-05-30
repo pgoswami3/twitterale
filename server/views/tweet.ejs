@@ -5,13 +5,50 @@
     <title><%= title %></title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/main.css">
-    
+    <script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+    <script type="text/javascript" src="/js/d3.js"></script>
+    <script type="text/javascript" src="/js/d3.layout.cloud.js"></script>
+
   </head>
   <body>
 
     <div class="col-sm-8 wordcloud">
-      <a href="https://twitter.com/Goswamipratik2" class="twitter-follow-button" data-show-count="false">Follow me: @Goswamipratik2</a>
-      <% include wordcloud.ejs %>
+      <a href="https://twitter.com/Goswamipratik2" class="twitter-follow-button" data-show-count="true">Follow me: @Goswamipratik2</a>
+      
+      <script>
+        var fill = d3.scale.category20();
+        // var textOnly = ['i','am','groot'];
+      d3.layout.cloud().size([600, 600])
+        .words(<%- JSON.stringify(textOnly) %>.map(function(d) {
+          return {text: d, size: 10 + Math.random() * 90};
+        }))
+        .padding(5)
+        .rotate(function() { return ~~(Math.random() * 2) * 90; })
+        .font("Impact")
+        .fontSize(function(d) { return d.size; })
+        .on("end", draw)
+        .start();
+
+      function draw(words) {
+        d3.select("body").append("svg")
+          .attr("width", 600)
+          .attr("height", 600)
+        .append("g")
+          .attr("transform", "translate(300,300)")
+        .selectAll("text")
+          .data(words)
+        .enter().append("text")
+          .style("font-size", function(d) { return d.size + "px"; })
+          .style("font-family", "Impact")
+          .style("fill", function(d, i) { return fill(i); })
+          .attr("text-anchor", "middle")
+          .attr("transform", function(d) {
+            return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+          })
+          .text(function(d) { return d.text; });
+      }
+</script>
     </div>
 
     <div class="col-sm-4 timeline">
@@ -19,11 +56,8 @@
       <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
     </div>
 
-    <script type="text/javascript" src="/js/d3.js"></script>
-    <script type="text/javascript" src="/js/d3.layout.cloud.js"></script>
-    <script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/js/main.js"></script>
+    
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/split.js/1.2.0/split.min.js">
     </script>
 

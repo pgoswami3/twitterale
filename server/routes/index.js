@@ -2,7 +2,10 @@ var express = require('express');
 var router = express.Router();
 var Twitter = require('twitter');
 var config = require('../_config');
+var $ = require('jquery');
 var textOnly = [];
+var arr = [];
+var q = [];
 
 // Authentication for twitter
 var passportTwitter = require('../auth/twitter');
@@ -34,11 +37,16 @@ router.get('/tweet', function(req, res){
 		client.get('statuses/user_timeline', function(error, tweets, response) {
     	if (!error) {
           for (var i=0; i<tweets.length; i++){
-            textOnly.push(tweets[i].text);
+            var joinq = (tweets[i].text).split(" ");
+            arr.push(joinq);
           }
-          //express.locals.textOnly = textOnly; // not a good idea!
+          textOnly = Array.prototype.concat.apply([], arr);
+          var unique = textOnly.filter(function(elem, pos) {
+            return textOnly.indexOf(elem) == pos;
+          });
+          console.log(JSON.stringify(unique));
           
-      		res.status(200).render('tweet', { title: 'Twitterale', tweets: tweets });
+      		res.status(200).render('tweet', { title: 'Twitterale', tweets: tweets, textOnly: unique });
     	}
     	else {
       		res.status(500).json({ title: 'Error!', error: error });
@@ -46,6 +54,9 @@ router.get('/tweet', function(req, res){
   	});
 });
 
+router.post('/tweet', function(req, res){
+  res.render('wordcloud', {textOnly: unique});
+});
 router.get('/wordcloud', function(req, res){
   res.render('wordcloud');
 });

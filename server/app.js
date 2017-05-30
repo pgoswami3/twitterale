@@ -86,4 +86,7 @@ mongoose.connect('mongodb://localhost/passport-social-auth');
 // setting up the public images
 app.use(express.static('public'))
 
+//d3,js - word cloud
+
+
 module.exports = app;
