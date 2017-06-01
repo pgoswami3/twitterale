@@ -26,3 +26,8 @@ img {
   
 	float:right !important;
 }
+
+.btn-twitter{
+  height: 35px;
+  width: 190px;
+}

@@ -3,7 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title><%= title %></title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.css">
     <link rel="stylesheet" href="/css/main.css">
   </head>
   <body>
@@ -12,17 +15,19 @@
 
     <title><%= title %></title>
     <p>Welcome to <%= title %></p>
-    <a href="https://twitter.com/Goswamipratik2" class="twitter-follow-button" data-show-count="false">Follow me: @Goswamipratik2</a>
+
+    <a href="https://twitter.com/Goswamipratik2" class="twitter-follow-button" data-show-count="true">Follow me: @Goswamipratik2</a>
 
     <hr>
-    <a href="/auth/twitter" class="btn-twitter">Twitter </a>
+    <a href="/auth/twitter" class="btn btn-block btn-social btn-twitter">
+      <span class="fa fa-twitter"></span> Sign in with Twitter
+    </a>
+           
   </div>
   </div>
     <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/js/main.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/split.js/1.2.0/split.min.js">
+    <script type="text/javascript" src="/js/main.js"></script>    
     </script>
   </body>
 </html>

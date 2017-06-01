@@ -19,7 +19,7 @@
       <script>
         var fill = d3.scale.category20();
         // var textOnly = ['i','am','groot'];
-      d3.layout.cloud().size([600, 600])
+      d3.layout.cloud().size([800, 600])
         .words(<%- JSON.stringify(textOnly) %>.map(function(d) {
           return {text: d, size: 10 + Math.random() * 90};
         }))
@@ -32,7 +32,7 @@
 
       function draw(words) {
         d3.select("body").append("svg")
-          .attr("width", 600)
+          .attr("width", 800)
           .attr("height", 600)
         .append("g")
           .attr("transform", "translate(300,300)")

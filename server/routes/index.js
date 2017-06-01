@@ -3,6 +3,7 @@ var router = express.Router();
 var Twitter = require('twitter');
 var config = require('../_config');
 var $ = require('jquery');
+var emojiStrip = require('emoji-strip');
 var textOnly = [];
 var arr = [];
 var q = [];
@@ -37,13 +38,16 @@ router.get('/tweet', function(req, res){
 		client.get('statuses/user_timeline', function(error, tweets, response) {
     	if (!error) {
           for (var i=0; i<tweets.length; i++){
-            var joinq = (tweets[i].text).split(" ");
-            arr.push(joinq);
+            console.log((tweets[i].text));
+            var joinq = (tweets[i].text);
+            var temp = emojiStrip(joinq).replace(/(?:https?|ftp):\/\/[\n\S]+/g, '').split(" ");
+            arr.push(temp);
           }
           textOnly = Array.prototype.concat.apply([], arr);
           var unique = textOnly.filter(function(elem, pos) {
             return textOnly.indexOf(elem) == pos;
           });
+          // var filterSmily = regex.exec(unique);
           console.log(JSON.stringify(unique));
           
       		res.status(200).render('tweet', { title: 'Twitterale', tweets: tweets, textOnly: unique });
@@ -54,9 +58,6 @@ router.get('/tweet', function(req, res){
   	});
 });
 
-router.post('/tweet', function(req, res){
-  res.render('wordcloud', {textOnly: unique});
-});
 router.get('/wordcloud', function(req, res){
   res.render('wordcloud');
 });
