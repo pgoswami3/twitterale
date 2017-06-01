@@ -1,5 +1,8 @@
 # Twitterale
 
+A Word-cloud of 'your' tweets and timeline
+
+
 # Setup:
   1. Install dependencies from package.json
   2. Run a MongoDB instance & do npm start;
